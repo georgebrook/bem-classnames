@@ -1,0 +1,23 @@
+{
+  "name": "bem-classnames",
+  "version": "1.0.0",
+  "description": "A TypeScript BEM utility for React projects with CSS modules",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": ["bem", "classnames", "react", "css-modules"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.4.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.0"
+  }
+}
