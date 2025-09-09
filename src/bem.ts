@@ -36,10 +36,8 @@ export function bem(
   modifiers?: Modifiers,
   extra?: Extra
 ): string {
-  // Base class: either the block or block__element
   const base = element ? `${block}__${element}` : block;
 
-  // Normalize modifiers to an array of strings
   const mods = Array.isArray(modifiers)
     ? modifiers
     : modifiers
@@ -47,9 +45,7 @@ export function bem(
       : [];
   const modClasses = mods.map((m) => `${base}--${m}`);
 
-  // Normalize extras to an array of strings
   const extras = Array.isArray(extra) ? extra : extra ? [extra] : [];
 
-  // Merge all class names into a single string
   return [base, ...modClasses, ...extras].join(" ");
 }

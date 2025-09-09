@@ -1,1 +1,1 @@
-export { bem, Modifiers, ClassName } from "./bem";
+export { bem, Modifiers, Extra } from "./bem";

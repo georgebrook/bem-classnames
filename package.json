@@ -1,5 +1,5 @@
 {
-  "name": "bem-classnames",
+  "name": "react-bem-classnames",
   "version": "1.0.0",
   "description": "A TypeScript BEM utility for React projects with CSS modules",
   "main": "dist/index.js",
