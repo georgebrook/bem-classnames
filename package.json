@@ -21,12 +21,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/bem-classnames.git"
+    "url": "git+https://github.com/georgebrook/bem-classnames.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_GITHUB_USERNAME/bem-classnames/issues"
+    "url": "https://github.com/georgebrook/bem-classnames/issues"
   },
-  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/bem-classnames#readme",
+  "homepage": "https://github.com/georgebrook/bem-classnames#readme",
   "dependencies": {
     "classnames": "^2.4.2"
   },
