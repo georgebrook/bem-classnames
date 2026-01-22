@@ -1,50 +1,47 @@
 /**
  * BEM (Block Element Modifier) utility.
- *
- * Generates CSS class names following the BEM convention.
- *
- * @example
- * bem("card");
- * // → "card"
- *
- * bem("card", "title", ["fancy"], "inside-card");
- * // → "card__title card__title--fancy inside-card"
- *
- * bem("heading", undefined, "subheading");
- * // → "heading heading--subheading"
- *
- * bem("heading", "subtitle", ["large", "bold"], ["extra", "highlight"]);
- * // → "heading__subtitle heading__subtitle--large heading__subtitle--bold extra highlight"
  */
 
-export type Modifiers = string | string[];
+export type Modifiers = string | string[] | Record<string, boolean | null | undefined>;
 export type Extra = string | string[];
+
+export interface Block {
+  name: string;
+  modifiers?: string[];
+}
 
 /**
  * Build a BEM-compliant class string.
  *
- * @param block - The base block name (e.g. `"card"`).
- * @param element - Optional element name (e.g. `"title"`). Appended as `block__element`.
- * @param modifiers - Optional modifier(s). Appended as `--modifier` (e.g. `"block--large"`).
- * @param extra - Optional extra class(es) outside the BEM scope.
- *
- * @returns A space-delimited string of class names.
+ * @param block - The base block name or a Block object.
+ * @param element - Optional element name.
+ * @param modifiers - Optional modifier(s) (string, array, or object).
+ * @param extra - Optional extra class(es) outside BEM scope.
  */
 export function bem(
-  block: string,
+  block: string | Block,
   element?: string,
   modifiers?: Modifiers,
   extra?: Extra
 ): string {
-  const base = element ? `${block}__${element}` : block;
+  // 1. Extract the block name
+  const blockName = typeof block === 'string' ? block : block.name;
+  const base = element ? `${blockName}__${element}` : blockName;
 
-  const mods = Array.isArray(modifiers)
-    ? modifiers
-    : modifiers
-      ? [modifiers]
-      : [];
+  // 2. Parse Modifiers
+  let mods: string[] = [];
+  if (Array.isArray(modifiers)) {
+    mods = modifiers;
+  } else if (typeof modifiers === 'string') {
+    mods = [modifiers];
+  } else if (modifiers && typeof modifiers === 'object') {
+    // Handle the { 'modifier-name': true } pattern
+    mods = Object.keys(modifiers).filter((key) => !!(modifiers as any)[key]);
+  }
+
   const modClasses = mods.map((m) => `${base}--${m}`);
 
+  // 3. Parse Extra classes
   const extras = Array.isArray(extra) ? extra : extra ? [extra] : [];
 
   return [base, ...modClasses, ...extras].join(" ");
